@@ -1,0 +1,52 @@
+sensor:
+  - platform: adc
+    pin: GPIO33
+    name: "Soil Moisture"
+    unit_of_measurement: "%"
+    device_class: MOISTURE
+    update_interval: 2s
+    attenuation: 11db
+    accuracy_decimals: 2
+    filters:
+    - calibrate_linear:
+        - 0.99 ->  100.00
+        - 2.2 ->  0.00
+    - lambda: |
+       if (x < 0) return 0;
+       else if (x > 100) return 100;
+       else return (x);
+
+  - platform: adc
+    pin: GPIO33
+    name: "Soil Moisture Voltage"
+    unit_of_measurement: "V"
+    device_class: MOISTURE
+    update_interval: 2s
+    attenuation: 11db
+    accuracy_decimals: 2
+
+  - platform: adc
+    pin: GPIO32
+    name: "Soil Moisture--1"
+    unit_of_measurement: "%"
+    device_class: MOISTURE
+    update_interval: 2s
+    attenuation: 11db
+    accuracy_decimals: 2
+    filters:
+    - calibrate_linear:
+        - 0.99 ->  100.00
+        - 2.2 ->  0.00
+    - lambda: |
+       if (x < 0) return 0;
+       else if (x > 100) return 100;
+       else return (x);
+
+  - platform: adc
+    pin: GPIO32
+    name: "Soil Moisture--1 Voltage"
+    unit_of_measurement: "V"
+    device_class: MOISTURE
+    update_interval: 2s
+    attenuation: 11db
+    accuracy_decimals: 2
